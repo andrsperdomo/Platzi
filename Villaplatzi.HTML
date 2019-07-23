@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Villa Platzi</title>
+  </head>
+  <body>
+    <h1>Mira como se mueve la granja</h1>
+    <p> Oprime F5 (actualizar) para ver como se mueven los animales en la granjita.</p>
+
+    <canvas id="villaplatzi" width="500" height="500"></canvas>
+    <script>
+      var vp = document.getElementById("villaplatzi");
+      var papel = vp.getContext("2d");
+      var fondo = {
+        url: "https://i.imgur.com/JFI9rSW.png",
+        cargaOk: false
+      }
+      var vaca = {
+        url: "https://i.imgur.com/Wtfshlf.png",
+        cargaOk: false
+      }
+      var pollo = {
+        url: "https://i.imgur.com/rgeib7y.png",
+        cargaOk: false
+      }
+      var cerdo = {
+        url: "https://i.imgur.com/Y0Ge1fh.png",
+        cargaOk: false
+      };
+
+    var vacas = aleatorio(8,40);
+    var pollos = aleatorio(7,35);
+    var cerdos = aleatorio(6,30);
+    console.log("vaca: ", vacas, "Pollo: ", pollos, "Cerdo: ", cerdos);
+
+
+    fondo.imagen = new Image();
+    fondo.imagen.src = fondo.url;
+    fondo.imagen.addEventListener("load", cargarFondo);
+
+    vaca.imagen = new Image();
+    vaca.imagen.src = vaca.url;
+    vaca.imagen.addEventListener("load",cargarVacas);
+
+    vaca.imagen = new Image();
+    vaca.imagen.src = vaca.url;
+    vaca.imagen.addEventListener("load",cargarVacas);
+
+    pollo.imagen = new Image();
+    pollo.imagen.src = pollo.url;
+    pollo.imagen.addEventListener("load",cargarPollos);
+
+    cerdo.imagen = new Image();
+    cerdo.imagen.src = cerdo.url;
+    cerdo.imagen.addEventListener("load",cargarCerdos);
+
+
+    function cargarFondo()
+    {
+      fondo.cargaOk = true;
+      dibujar();
+
+    }
+    function cargarVacas()
+    {
+      vaca.cargaOk = true;
+      dibujar();
+    }
+    function cargarPollos()
+    {
+      pollo.cargaOk = true;
+      dibujar();
+    }
+    function cargarCerdos()
+    {
+      cerdo.cargaOk = true;
+      dibujar();
+    }
+
+    function dibujar()
+    {
+      if (fondo.cargaOk)
+      {
+      papel.drawImage(fondo.imagen, 0, 0);
+      }
+      if (vaca.cargaOk)
+      {
+      for(var v=0; v < vacas; v++)
+        {
+          var x = aleatorio(0, 7);
+          var y = aleatorio(0, 15);
+          var x = x * 60;
+          var y = y * 40;
+          papel.drawImage(vaca.imagen, x, y);
+          }
+        }
+      if (cerdo.cargaOk)
+      {
+        for (var c=0; c < cerdos; c++)
+        {
+        var x = aleatorio(0,6);
+        var y = aleatorio(0,10)
+        var x = x * 50;
+        var y = y * 30;
+        papel.drawImage(cerdo.imagen, x, y);
+        }
+      }
+      if (pollo.cargaOk)
+      {
+        for (var c=0; c < pollos; c++)
+        {
+        var x = aleatorio(0,5);
+        var y = aleatorio(0,20)
+        var x = x * 70;
+        var y = y * 20;
+        papel.drawImage(pollo.imagen, x, y);
+        }
+      }
+    }
+    function aleatorio (min, maxi)
+    {
+      var resultado;
+      resultado = Math.floor(Math.random() * (maxi - min + 1)) + min;
+      return resultado;
+    }
+    document.write("<br>En la granja tenemos " + vacas + " vaquitas, " + cerdos + " chanchos y " + pollos + " gallinas." );
+    </script>
+  </body>
+</html>
